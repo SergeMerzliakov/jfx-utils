@@ -1,11 +1,26 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version "1.4.0"
     id 'org.openjfx.javafxplugin' version "0.0.9"
+    id 'maven-publish'
 }
 
 def KOTLIN_VERSION = "1.4.0"
 
 group 'org.epistatic'
+
+def jarVersion = 1.0
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'org.epistatic'
+            artifactId = 'jfx-utils'
+            version = "$jarVersion"
+
+            from components.java
+        }
+    }
+}
 
 def localConfig = "local.properties"
 
@@ -20,6 +35,7 @@ file(localConfig).withInputStream { localProperties.load(it) }
 
 repositories {
     mavenCentral()
+    mavenLocal()
     jcenter()
     flatDir {
         dirs "${localProperties.JFX_PATH}/lib"
@@ -75,6 +91,16 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {
+    manifest.attributes('Multi-Release': 'false')
+    manifest.attributes('Jar-Version': "$jarVersion")
+    manifest.attributes('Author': 'Serge Merzliakov - Copyright 2020')
+    manifest.attributes('Build-Date': new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()))
+    doFirst {
+        version = "$jarVersion"
+    }
 }
 
 // tests run in headless mode by default, to watch tests pass in -DshowTests=true on command line
