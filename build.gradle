@@ -1,0 +1,92 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version "1.4.0"
+    id 'org.openjfx.javafxplugin' version "0.0.9"
+}
+
+def KOTLIN_VERSION = "1.4.0"
+
+group 'org.epistatic'
+
+def localConfig = "local.properties"
+
+// make sure local.properties exist and load them
+def localProperties = new Properties()
+if (!file(localConfig).exists()) {
+    throw new RuntimeException("Local configuration file $localConfig not found. Please create this file " +
+            "and add these properties (detailed in README.md) -\n" +
+            "JFX_VERSION and JFX_PATH")
+}
+file(localConfig).withInputStream { localProperties.load(it) }
+
+repositories {
+    mavenCentral()
+    jcenter()
+    flatDir {
+        dirs "${localProperties.JFX_PATH}/lib"
+    }
+}
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/kotlin')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+
+javafx {
+    version = localProperties.JFX_VERSION
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing' ]
+}
+
+dependencies {
+    implementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "com.google.guava:guava:28.1-jre"
+    compile "com.google.code.gson:gson:2.8.6"
+
+    compile "org.apache.logging.log4j:log4j-api:2.12.1"
+    compile "org.apache.logging.log4j:log4j-core:2.12.1"
+
+    testCompile "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
+
+    testCompile "junit:junit:4.12" // testfx does not support Junit 5
+    testCompile "org.assertj:assertj-core:3.13.2"
+    testCompile "io.mockk:mockk:1.9.3"
+    testCompile "org.testfx:testfx-core:4.0.16-alpha"
+    testCompile "org.testfx:testfx-junit:4.0.16-alpha"
+    testCompile "org.testfx:openjfx-monocle:jdk-12.0.1+2"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+// tests run in headless mode by default, to watch tests pass in -DshowTests=true on command line
+test {
+    if (System.getProperty('showTests') != null)
+        systemProperty 'headless', false
+    else
+        systemProperty 'headless', true
+}
+
+
+task integrationTest(type: Test) {
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}
