@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version "1.4.0"
+    id 'org.jetbrains.kotlin.jvm' version "1.4.21"
     id 'org.openjfx.javafxplugin' version "0.0.9"
     id 'maven-publish'
 }
@@ -8,7 +8,7 @@ def KOTLIN_VERSION = "1.4.0"
 
 group 'org.epistatic'
 
-def jarVersion = "1.0.1"
+def jarVersion = "1.1.0"
 
 publishing {
     publications {
@@ -65,17 +65,13 @@ javafx {
 }
 
 dependencies {
-    implementation 'junit:junit:4.12'
-    implementation 'junit:junit:4.12'
-    implementation 'junit:junit:4.12'
-    implementation 'junit:junit:4.12'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
+    compile "org.jetbrains.kotlin:kotlin-reflect:${KOTLIN_VERSION}"
     compile "com.google.code.gson:gson:2.8.6"
 
     compile "org.apache.logging.log4j:log4j-api:2.12.1"
     compile "org.apache.logging.log4j:log4j-core:2.12.1"
 
-    testCompile "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
 
     testCompile "junit:junit:4.12" // testfx does not support Junit 5
     testCompile "org.assertj:assertj-core:3.13.2"

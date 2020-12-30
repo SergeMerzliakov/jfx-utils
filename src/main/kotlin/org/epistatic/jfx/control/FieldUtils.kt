@@ -16,6 +16,9 @@
 
 package org.epistatic.jfx.control
 
+import javafx.scene.control.TextField
+import java.io.File
+
 fun cleanText(s: String?): String {
 	s?.apply {
 		return s.trim()

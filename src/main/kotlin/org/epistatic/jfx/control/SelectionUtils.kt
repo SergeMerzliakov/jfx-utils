@@ -17,9 +17,9 @@ package org.epistatic.jfx.control
 
 import javafx.scene.control.ChoiceBox
 import javafx.scene.control.ComboBox
-import javafx.scene.control.Control
 import javafx.scene.control.ListView
-
+import javafx.scene.control.MultipleSelectionModel
+import kotlin.reflect.full.declaredMemberProperties
 
 /**
  * Invoke given function on change of selection
@@ -61,4 +61,18 @@ fun selectionChangedHandler(f: ChoiceBox<*>, handler: (f: ChoiceBox<*>) -> Unit)
 				if (old != new)
 					handler(f)
 			}
+}
+
+
+/**
+ * return selected items property name value or null if nothing selected
+ */
+fun <T : Any?> selectedItemProperty(model: MultipleSelectionModel<*>, propertyName: String): T? {
+	if (model.isEmpty)
+		return null
+
+	val instance: Any = model.selectedItem as Any
+	val clazz = instance.javaClass.kotlin
+	@Suppress("UNCHECKED_CAST")
+	return clazz.declaredMemberProperties.first { it.name == propertyName }.get(instance) as T
 }
