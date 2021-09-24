@@ -22,24 +22,13 @@ publishing {
     }
 }
 
-def localConfig = "local.properties"
-
-// make sure local.properties exist and load them
-def localProperties = new Properties()
-if (!file(localConfig).exists()) {
-    throw new RuntimeException("Local configuration file $localConfig not found. Please create this file " +
-            "and add these properties (detailed in README.md) -\n" +
-            "JFX_VERSION and JFX_PATH")
-}
-file(localConfig).withInputStream { localProperties.load(it) }
-
 repositories {
-    mavenCentral()
     mavenLocal()
-    jcenter()
-    flatDir {
-        dirs "${localProperties.JFX_PATH}/lib"
+    mavenCentral()
+    maven {
+        url "https://nexus.gluonhq.com/nexus/content/repositories/releases/"
     }
+
 }
 
 sourceSets {
@@ -60,7 +49,6 @@ configurations {
 
 
 javafx {
-    version = localProperties.JFX_VERSION
     modules = [ 'javafx.controls', 'javafx.fxml' ] //'javafx.swing'
 }
 
@@ -76,9 +64,6 @@ dependencies {
     testImplementation "junit:junit:4.12" // testfx does not support Junit 5
     testImplementation "org.assertj:assertj-core:3.13.2"
     testImplementation "io.mockk:mockk:1.9.3"
-    testImplementation "org.testfx:testfx-core:4.0.16-alpha"
-    testImplementation "org.testfx:testfx-junit:4.0.16-alpha"
-    testImplementation "org.testfx:openjfx-monocle:jdk-12.0.1+2"
 }
 
 compileKotlin {

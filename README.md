@@ -8,15 +8,9 @@ A kotlin/java library of JavaFX Utilities and common code
 
 # Build
 
-* Create a local properties file (for JFX configuration) in **<repo>/local.properties**. A sample local.properties:
-
-        JFX_VERSION=14.0.1
-        JFX_PATH=/Library/Java/javafx/14.0.1
-
-
 Then run
 
-    gradlew build
+    gradlew clean build
 
 # Deploy
 
