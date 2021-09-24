@@ -31,8 +31,8 @@ object OperatingSystem {
     * Return current os as an enumerated type
     */
    fun os(): Type {
-      val name = System.getProperty("os.name").trim().toLowerCase()
-      val version = System.getProperty("os.version").trim().toLowerCase()
+      val name = System.getProperty("os.name").trim().lowercase()
+      val version = System.getProperty("os.version").trim().lowercase()
 
       when {
          name.startsWith("mac") -> return Type.OSX

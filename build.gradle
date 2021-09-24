@@ -1,14 +1,14 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version "1.4.21"
-    id 'org.openjfx.javafxplugin' version "0.0.9"
+    id 'org.jetbrains.kotlin.jvm' version "1.5.30"
+    id 'org.openjfx.javafxplugin' version "0.0.10"
     id 'maven-publish'
 }
 
-def KOTLIN_VERSION = "1.4.0"
+def KOTLIN_VERSION = "1.5.30"
 
 group 'org.epistatic'
 
-def jarVersion = "1.1.0"
+def jarVersion = "1.2.0"
 
 publishing {
     publications {
@@ -65,33 +65,33 @@ javafx {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
-    compile "org.jetbrains.kotlin:kotlin-reflect:${KOTLIN_VERSION}"
-    compile "com.google.code.gson:gson:2.8.6"
+    api "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
+    api "org.jetbrains.kotlin:kotlin-reflect:${KOTLIN_VERSION}"
+    api "com.google.code.gson:gson:2.8.8"
 
-    compile "org.apache.logging.log4j:log4j-api:2.12.1"
-    compile "org.apache.logging.log4j:log4j-core:2.12.1"
+    api "org.apache.logging.log4j:log4j-api:2.14.1"
+    api "org.apache.logging.log4j:log4j-core:2.14.1"
 
 
-    testCompile "junit:junit:4.12" // testfx does not support Junit 5
-    testCompile "org.assertj:assertj-core:3.13.2"
-    testCompile "io.mockk:mockk:1.9.3"
-    testCompile "org.testfx:testfx-core:4.0.16-alpha"
-    testCompile "org.testfx:testfx-junit:4.0.16-alpha"
-    testCompile "org.testfx:openjfx-monocle:jdk-12.0.1+2"
+    testImplementation "junit:junit:4.12" // testfx does not support Junit 5
+    testImplementation "org.assertj:assertj-core:3.13.2"
+    testImplementation "io.mockk:mockk:1.9.3"
+    testImplementation "org.testfx:testfx-core:4.0.16-alpha"
+    testImplementation "org.testfx:testfx-junit:4.0.16-alpha"
+    testImplementation "org.testfx:openjfx-monocle:jdk-12.0.1+2"
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "16"
 }
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "16"
 }
 
 jar {
     manifest.attributes('Multi-Release': 'false')
     manifest.attributes('Jar-Version': "$jarVersion")
-    manifest.attributes('Author': 'Serge Merzliakov - Copyright 2020')
+    manifest.attributes('Author': 'Serge Merzliakov - Copyright 2021')
     manifest.attributes('Build-Date': new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()))
     doFirst {
         version = "$jarVersion"
