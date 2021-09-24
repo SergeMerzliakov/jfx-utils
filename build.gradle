@@ -61,7 +61,7 @@ configurations {
 
 javafx {
     version = localProperties.JFX_VERSION
-    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing' ]
+    modules = [ 'javafx.controls', 'javafx.fxml' ] //'javafx.swing'
 }
 
 dependencies {
