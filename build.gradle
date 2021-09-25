@@ -8,7 +8,7 @@ def KOTLIN_VERSION = "1.5.30"
 
 group 'org.epistatic'
 
-def jarVersion = "1.2.0"
+def jarVersion = "1.2.1"
 
 publishing {
     publications {

@@ -17,15 +17,17 @@ package org.epistatic.jfx.dialog
 
 import javafx.stage.Modality
 import javafx.stage.Stage
+import javafx.stage.StageStyle
 
 /**
  * Superclass of all non-trivial custom dialogs which are essential modal windows
  * Not for standard message or warning dialogs - use JavaFX dialogs for those
  */
-abstract class CustomDialog<T>(ownerStage: Stage?, title: String) {
+abstract class CustomDialog<T>(ownerStage: Stage?, title: String, style: StageStyle = StageStyle.DECORATED) {
    var stage: Stage = Stage()
 
    init {
+      stage.initStyle(style)
       stage.title = title
       stage.initOwner(ownerStage)
    }
