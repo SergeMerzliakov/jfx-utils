@@ -15,10 +15,7 @@
  */
 package org.epistatic.jfx.control
 
-import javafx.scene.control.ChoiceBox
-import javafx.scene.control.ComboBox
-import javafx.scene.control.ListView
-import javafx.scene.control.MultipleSelectionModel
+import javafx.scene.control.*
 import kotlin.reflect.full.declaredMemberProperties
 
 /**
@@ -39,7 +36,7 @@ fun selectionChangedHandler(f: ComboBox<*>, handler: (f: ComboBox<*>) -> Unit) {
 /**
  * SelectionModel is not in any shared base class - all relevant controls just
  * have it as a member. Simpler to have a function for each rather than a generic
- * function.s
+ * function
  */
 fun selectionChangedHandler(f: ListView<*>, handler: (f: ListView<*>) -> Unit) {
 	f.selectionModel.selectedIndexProperty()
@@ -49,11 +46,23 @@ fun selectionChangedHandler(f: ListView<*>, handler: (f: ListView<*>) -> Unit) {
 			}
 }
 
+/**
+ * SelectionModel is not in any shared base class - all relevant controls just
+ * have it as a member. Simpler to have a function for each rather than a generic
+ * function
+ */
+fun selectionChangedHandler(f: TableView<*>, handler: (f: TableView<*>) -> Unit) {
+	f.selectionModel.selectedIndexProperty()
+		.addListener { _, old, new ->
+			if (old != new)
+				handler(f)
+		}
+}
 
 /**
  * SelectionModel is not in any shared base class - all relevant controls just
  * have it as a member. Simpler to have a function for each rather than a generic
- * function.s
+ * function
  */
 fun selectionChangedHandler(f: ChoiceBox<*>, handler: (f: ChoiceBox<*>) -> Unit) {
 	f.selectionModel.selectedItemProperty()
