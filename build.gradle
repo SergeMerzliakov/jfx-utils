@@ -1,16 +1,14 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version "1.6.0"
+    id 'org.jetbrains.kotlin.jvm' version "1.5.30"
     id 'org.openjfx.javafxplugin' version "0.0.10"
     id 'maven-publish'
 }
 
-def KOTLIN_VERSION = "1.6.0"
-
-def JFX_INSTALL = '/Library/Java/javafx/17.0.2.ea1'
+def KOTLIN_VERSION = "1.5.30"
 
 group 'org.epistatic'
 
-def jarVersion = "1.2.7"
+def jarVersion = "1.2.4"
 
 publishing {
     publications {
@@ -51,16 +49,17 @@ configurations {
 
 
 javafx {
-    sdk = "${JFX_INSTALL}"
+    version = "16"
     modules = [ 'javafx.controls', 'javafx.fxml' ] //'javafx.swing'
 }
 
 dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
     api "org.jetbrains.kotlin:kotlin-reflect:${KOTLIN_VERSION}"
-    api "com.google.code.gson:gson:2.8.9"
+    api "com.google.code.gson:gson:2.8.8"
 
-    api "org.apache.logging.log4j:log4j-api:2.15.0"
+    api "org.apache.logging.log4j:log4j-api:2.14.1"
+    api "org.apache.logging.log4j:log4j-core:2.14.1"
 
 
     testImplementation "junit:junit:4.12" // testfx does not support Junit 5

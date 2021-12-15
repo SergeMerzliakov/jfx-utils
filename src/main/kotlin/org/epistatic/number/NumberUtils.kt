@@ -43,7 +43,6 @@ fun acceptDoubles(field: TextField) {
         if (c.controlNewText.isEmpty()) {
             c
         }
-        integerFormat.isParseIntegerOnly = false
         val parsePosition = ParsePosition(0)
         val obj = integerFormat.parse(c.controlNewText, parsePosition)
         if (obj == null || parsePosition.index < c.controlNewText.length) {
