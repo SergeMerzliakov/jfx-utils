@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version "1.6.0"
+    id 'org.jetbrains.kotlin.jvm' version "1.6.10"
     id 'org.openjfx.javafxplugin' version "0.0.10"
     id 'maven-publish'
 }
@@ -10,7 +10,7 @@ def JFX_INSTALL = '/Library/Java/javafx/17.0.2.ea1'
 
 group 'org.epistatic'
 
-def jarVersion = "1.2.7"
+def jarVersion = "1.2.8"
 
 publishing {
     publications {
@@ -60,7 +60,7 @@ javafx {
 dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VERSION}"
     api "org.jetbrains.kotlin:kotlin-reflect:${KOTLIN_VERSION}"
-    api "com.google.code.gson:gson:2.8.9"
+    api "com.google.code.gson:gson:2.9.0"
 
     api "org.apache.logging.log4j:log4j-api:2.15.0"
 
@@ -80,7 +80,7 @@ compileTestKotlin {
 jar {
     manifest.attributes('Multi-Release': 'false')
     manifest.attributes('Jar-Version': "$jarVersion")
-    manifest.attributes('Author': 'Serge Merzliakov - Copyright 2021')
+    manifest.attributes('Author': 'Serge Merzliakov - Copyright 2022')
     manifest.attributes('Build-Date': new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()))
     doFirst {
         version = "$jarVersion"
