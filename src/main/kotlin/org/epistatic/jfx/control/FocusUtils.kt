@@ -4,10 +4,6 @@ import javafx.event.EventHandler
 import javafx.scene.control.Control
 import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyEvent
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import java.io.*;
-import java.util.*;
 
 
 /*

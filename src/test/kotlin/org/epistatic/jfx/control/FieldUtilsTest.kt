@@ -15,10 +15,8 @@
  */
 package org.epistatic.jfx.control
 
-import java.io.*
-import org.junit.Test
 import org.assertj.core.api.Assertions.assertThat
-import org.epistatic.jfx.control.cleanText
+import org.junit.Test
 
 class FieldUtilsTest {
 
