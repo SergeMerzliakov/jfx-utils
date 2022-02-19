@@ -15,7 +15,7 @@ if(Os.isFamily(Os.FAMILY_MAC)) {
     JFX_INSTALL = '/Library/Java/javafx/17.0.2'
 }
 else {
-    JFX_INSTALL = 'C:/jfx-17.0.2'
+    JFX_INSTALL = 'C:/jfx/jfx-17.0.2'
 }
 
 group 'org.epistatic'
