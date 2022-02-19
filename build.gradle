@@ -50,8 +50,8 @@ configurations {
 
 
 javafx {
-    version = "17.0.2" // use this to pull frop
-    modules = ['javafx.controls', 'javafx.fxml'] //'javafx.swing'
+    version = "17.0.2" // use this to pull from repo  - generates correct Maven POM and module files in local repo
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
